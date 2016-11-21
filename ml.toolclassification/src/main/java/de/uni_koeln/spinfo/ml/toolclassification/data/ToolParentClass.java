@@ -27,6 +27,5 @@ public class ToolParentClass {
 	public int getClassID() {
 		return classID;
 	}
-
 	
 }

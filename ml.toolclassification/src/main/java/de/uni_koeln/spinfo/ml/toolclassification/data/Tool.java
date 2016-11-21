@@ -1,11 +1,12 @@
 package de.uni_koeln.spinfo.ml.toolclassification.data;
 
+
 public class Tool {
 	private String name;
 	private int parentClassId;
-	private char subClassId;
+	private String subClassId;
 
-	public Tool(String name, int parentClassId, char subClassId) {
+	public Tool(String name, int parentClassId, String subClassId) {
 		super();
 		this.name = name;
 		this.parentClassId = parentClassId;
@@ -20,7 +21,7 @@ public class Tool {
 		return parentClassId;
 	}
 
-	public char getSubClassId() {
+	public String getSubClassId() {
 		return subClassId;
 	}
 	

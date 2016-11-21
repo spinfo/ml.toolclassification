@@ -5,13 +5,15 @@ import java.util.List;
 
 public class ToolSubClass {
 	private String name;
-	private char subClassID;
+	private String  subClassID;
+	private int parentClassID;
 	private List<Tool> toolsList;
 	
-	public ToolSubClass(String name, char subClassID) {
+	public ToolSubClass(String name, String subClassID, int parentClassID) {
 		super();
 		this.name = name;
 		this.subClassID = subClassID;
+		this.parentClassID = parentClassID;
 		this.toolsList = new ArrayList<Tool>();
 	}
 	
@@ -27,8 +29,11 @@ public class ToolSubClass {
 		return name;
 	}
 	
-	public char getSubClassID() {
+	public String getSubClassID() {
 		return subClassID;
 	}
 
+	public int getParentClassID() {
+		return parentClassID;
+	}
 }
