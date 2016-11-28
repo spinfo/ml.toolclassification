@@ -34,6 +34,26 @@ public class DataImporter {
 		subClasses = new HashMap<String, ToolSubClass>();
 	}
 	
+	
+	
+	public Map<String, Tool> getTools() {
+		return tools;
+	}
+
+
+
+	public Map<Integer, ToolParentClass> getParentClasses() {
+		return parentClasses;
+	}
+
+
+
+	public Map<String, ToolSubClass> getSubClasses() {
+		return subClasses;
+	}
+
+
+
 	/**
 	 * Parses the specified file and aggregates contained tools and classes.
 	 * @param filename File to parse
