@@ -3,6 +3,11 @@ package de.uni_koeln.spinfo.ml.toolclassification.data;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * A class to represent rough-grained tool classes 
+ * @author jhermes
+ *
+ */
 public class ToolParentClass {
 	private String name;
 	private int classID;

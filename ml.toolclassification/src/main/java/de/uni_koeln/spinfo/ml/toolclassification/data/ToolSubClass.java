@@ -3,6 +3,11 @@ package de.uni_koeln.spinfo.ml.toolclassification.data;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * A class to represent fine-grained tool classes
+ * @author jhermes
+ *
+ */
 public class ToolSubClass {
 	private String name;
 	private String  subClassID;
