@@ -8,6 +8,7 @@ public class Application {
 
 	public static void main(String[] args) throws IOException {
 		System.out.println("Tool Classifying Application");
+		System.out.println("----------------------------");
 		DataImporter di = new DataImporter();
 		di.parseToolsAndClassesFromFile("src/main/resources/data/DatenTools.tsv");
 	}
