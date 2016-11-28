@@ -11,6 +11,8 @@ public class Application {
 		System.out.println("----------------------------");
 		DataImporter di = new DataImporter();
 		di.parseToolsAndClassesFromFile("src/main/resources/data/DatenTools.tsv");
+		
+		System.out.println(di.getTools().size());
 	}
 
 }

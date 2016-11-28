@@ -88,7 +88,7 @@ public class DataImporter {
 					
 				}
 				else{
-					
+					//System.out.println("Duplicate Tool: " + toolName + " at position " + i + " with unclear subClassID");
 					//Check data integrity!
 					Tool inList = tools.get(toolName);
 					String inListSCID = inList.getSubClassId();
@@ -140,6 +140,24 @@ public class DataImporter {
 			parentClasses.put(parentClassID, tpc);
 		}
 		System.out.println("Parentclasses list count: " + parentClasses.size());
+//		Set<Integer> pcs = parentClasses.keySet();
+//		for (Integer integer : pcs) {
+//			System.out.println(parentClasses.get(integer).getSubclasses().size());
+//		}
+//		
+		
+		
+		Set<String> keySet2 = tools.keySet();
+		for (String string : keySet2) {
+			Tool tool = tools.get(string);
+			ToolSubClass toolSubClass = subClasses.get(tool.getSubClassId());
+			toolSubClass.addToolToList(tool);
+		}
+		
+//		Set<String> scs = subClasses.keySet();
+//		for (String string : scs) {
+//			System.out.println(subClasses.get(string).getToolsList().size());
+//		}
 		
 	}
 }
