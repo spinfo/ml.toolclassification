@@ -26,11 +26,13 @@ public class Application {
 		CrossvalidationGroupBuilder<Tool> cvgb = new CrossvalidationGroupBuilder<Tool>(values, 10);
 		for (TrainingTestSets<Tool> tts : cvgb) {
 			System.out.println(tts.getTrainingSet().size()); //--> Build model / choose classifier
+			
 			System.out.println(tts.getTestSet().size()); //--> Classify 
 			//--> Evaluate
 			System.out.println();
 		}
 		//--> Calculate mean
+		//End
 	}
 
 }
