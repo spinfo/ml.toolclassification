@@ -10,6 +10,7 @@ import java.util.Set;
 import de.uni_koeln.spinfo.ml.toolclassification.components.DataImporter;
 import de.uni_koeln.spinfo.ml.toolclassification.components.crossvalidation.CrossvalidationGroupBuilder;
 import de.uni_koeln.spinfo.ml.toolclassification.components.crossvalidation.TrainingTestSets;
+import de.uni_koeln.spinfo.ml.toolclassification.data.BayesModel;
 import de.uni_koeln.spinfo.ml.toolclassification.data.Tool;
 
 public class Application {
@@ -52,7 +53,43 @@ public class Application {
 		//End
 	}
 	
-	public static void performClassification(TrainingTestSets<Tool> tts){
+	private static void performClassification(TrainingTestSets<Tool> tts) {
+		
+		BayesModel bayes = new BayesModel();
+		
+		//Train
+		List<Tool> trainingSet = tts.getTrainingSet();
+		for (Tool tool : trainingSet) {
+			String context = tool.getContext();
+			String[] words = context.split("\\W+");
+			for (String word : words) {
+				bayes.addWordToClass(word, tool.getParentClassId());
+			}			
+		}
+		
+		//Test
+		List<Tool> testSet = tts.getTestSet();
+		for (Tool tool : testSet) {
+			String context = tool.getContext();
+			String[] words = context.split("\\W+");
+			
+			List<String> features = new ArrayList<String>();
+			for (String string : words) {
+				features.add(string);
+			}
+			
+			int guessedClass = bayes.getClassification(features);
+			int realClass = tool.getParentClassId();
+			System.out.println(guessedClass + " " + realClass);
+					
+			
+			
+		}
+		
+		
+	}
+
+	public static void performClassificationOld(TrainingTestSets<Tool> tts){
 		List<Tool> trainingSet = tts.getTrainingSet();	
 		Map<Integer, Map<String,Integer>> classBoWs = new HashMap<Integer,  Map<String,Integer>>();  
 		
