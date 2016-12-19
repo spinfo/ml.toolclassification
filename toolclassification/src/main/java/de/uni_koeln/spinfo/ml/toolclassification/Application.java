@@ -38,8 +38,9 @@ public class Application {
 		System.out.println("Before cleanup: " + tools.size());
 		tools= bufferList;
 		System.out.println("After cleanup: " + tools.size());
-		
-		CrossvalidationGroupBuilder<Tool> cvgb = new CrossvalidationGroupBuilder<Tool>(tools, 10);
+		int cvgroups = 10;
+		CrossvalidationGroupBuilder<Tool> cvgb = new CrossvalidationGroupBuilder<Tool>(tools, cvgroups);
+		double overallResult = 0.0;
 		for (TrainingTestSets<Tool> tts : cvgb) {
 			//System.out.println(tts.getTrainingSet().size()); //--> Build model / choose classifier
 			
@@ -47,13 +48,17 @@ public class Application {
 			//--> Evaluate
 			System.out.println();
 			
-			performClassification(tts);
+			double singleResult = performClassification(tts);
+			overallResult += singleResult;
 		}
 		//--> Calculate mean
+		overallResult = overallResult/cvgroups;
+		System.out.println("Overall accuracy: " + overallResult);
+		
 		//End
 	}
 	
-	private static void performClassification(TrainingTestSets<Tool> tts) {
+	private static double performClassification(TrainingTestSets<Tool> tts) {
 		
 		BayesModel bayes = new BayesModel();
 		
@@ -66,6 +71,10 @@ public class Application {
 				bayes.addWordToClass(word, tool.getParentClassId());
 			}			
 		}
+		
+		int matches = 0;
+		int misses = 0;
+		int notClassified = 0;
 		
 		//Test
 		List<Tool> testSet = tts.getTestSet();
@@ -80,40 +89,29 @@ public class Application {
 			
 			int guessedClass = bayes.getClassification(features);
 			int realClass = tool.getParentClassId();
-			System.out.println(guessedClass + " " + realClass);
-					
+			//System.out.println(guessedClass + " " + realClass);
 			
-			
+			if(guessedClass==0){
+				notClassified++;
+			}
+			else{
+				if(guessedClass==realClass){
+					matches++;
+				}
+				else{
+					misses++;
+				}
+			}
 		}
-		
-		
+			
+		System.out.println("Not classified: " + notClassified);
+		System.out.println("Correctly classified: " + matches);
+		System.out.println("Incorrectly classified: " + misses);
+		double accuracy = matches/((double)matches+misses);
+		System.out.println("Accuracy: " + accuracy);
+		System.out.println();
+		return accuracy;
 	}
 
-	public static void performClassificationOld(TrainingTestSets<Tool> tts){
-		List<Tool> trainingSet = tts.getTrainingSet();	
-		Map<Integer, Map<String,Integer>> classBoWs = new HashMap<Integer,  Map<String,Integer>>();  
-		
-		for (Tool tool : trainingSet) {
-			int parentClassId = tool.getParentClassId();
-			if(classBoWs.get(parentClassId)==null){
-				classBoWs.put(parentClassId, new HashMap<String, Integer>());
-			}
-			String context = tool.getContext();
-			String[] split = context.split("\\W+");
-			Map<String, Integer> boW = classBoWs.get(parentClassId);
-			for (String word : split) {
-				Integer count = boW.get(word);
-				if(count==null){
-					count = 0;
-				}
-				count++;
-				boW.put(word,count);
-			}
-		}
-		Set<Integer> keySet = classBoWs.keySet();
-		for (Integer integer : keySet) {
-			System.out.println(classBoWs.get(integer).size());
-		}
-	}
 
 }

@@ -40,9 +40,8 @@ public class BayesModel {
 				classValues.set(i, result);
 			}
 		}
-		int maxProbabilityPosition = getMaxProbabilityPosition(classValues);
-		
-		return maxProbabilityPosition+1;
+		int maxProbabilityPosition = getMaxProbabilityPosition(classValues);		
+		return maxProbabilityPosition+1; 
 	}
 	
 	
@@ -51,8 +50,8 @@ public class BayesModel {
 		Set<Integer> classIDs = models.keySet();
 		for (Integer classID : classIDs) {
 			Set<Integer> classIDs2 = models.keySet();
-			int proCount = 0;
-			int contraCount = 0;
+			int proCount = 1;
+			int contraCount = 1;
 			for (Integer classID2 : classIDs2) {
 				int wordCount = models.get(classID2).getWordCount(word);
 				if(classID==classID2){
@@ -62,7 +61,7 @@ public class BayesModel {
 					contraCount += wordCount;
 				}
 			}
-			toReturn.add(proCount/(double)contraCount);
+			toReturn.add(proCount/(double)(contraCount));
 		}
 		return toReturn;
 	}
@@ -79,7 +78,5 @@ public class BayesModel {
 		}
 		return max;
 	}
-	
-	
 
 }
