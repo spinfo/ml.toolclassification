@@ -2,12 +2,11 @@ package de.uni_koeln.spinfo.ml.toolclassification;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 import de.uni_koeln.spinfo.ml.toolclassification.components.DataImporter;
+import de.uni_koeln.spinfo.ml.toolclassification.components.VectorBuilder;
 import de.uni_koeln.spinfo.ml.toolclassification.components.crossvalidation.CrossvalidationGroupBuilder;
 import de.uni_koeln.spinfo.ml.toolclassification.components.crossvalidation.TrainingTestSets;
 import de.uni_koeln.spinfo.ml.toolclassification.data.BayesModel;
@@ -38,6 +37,17 @@ public class Application {
 		System.out.println("Before cleanup: " + tools.size());
 		tools= bufferList;
 		System.out.println("After cleanup: " + tools.size());
+		
+		VectorBuilder vb = new VectorBuilder(tools);
+//		for (Tool tool : tools) {
+//			int[] vec = vb.getVector(tool);
+//			for(int i=0; i<vec.length; i++){
+//				if(vec[i]!=0)
+//					System.out.print(vec[i] + "\t");
+//			}
+//			System.out.println();
+//		}
+		
 		int cvgroups = 10;
 		CrossvalidationGroupBuilder<Tool> cvgb = new CrossvalidationGroupBuilder<Tool>(tools, cvgroups);
 		double overallResult = 0.0;
