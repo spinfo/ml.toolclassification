@@ -7,20 +7,30 @@ package de.uni_koeln.spinfo.ml.toolclassification.data;
  *
  */
 public class Tool {
-	private String name;
+	private String label;
 	private int parentClassId;
 	private String subClassId;
 	private String context;
 
-	public Tool(String name, int parentClassId, String subClassId) {
+	/**
+	 * Initializes a new Tool with specified features
+	 * @param label Label of the Tool
+	 * @param parentClassId The parent class of the Tool (integer value between 1-8)
+	 * @param subClassId The subordinate class of the Toole (parent class PLUS a character)
+	 */
+	public Tool(String label, int parentClassId, String subClassId) {
 		super();
-		this.name = name;
+		this.label = label;
 		this.parentClassId = parentClassId;
 		this.subClassId = subClassId;
 	}
 
 	public String getName() {
-		return name;
+		return getLabel();
+	}
+	
+	public String getLabel() {
+		return label;
 	}
 
 	public int getParentClassId() {

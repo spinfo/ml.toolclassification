@@ -6,17 +6,32 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 
+/**
+ * A model to store models from different classes 
+ * and for the calculation of class membership probabilities
+ * based on a Naive Bayes classificator. 
+ * @author jhermes
+ *
+ */
 public class BayesModel {
 	
 	private Map<Integer, ClassModel> models;
 	
 	private int wordCount;
 	
+	/**
+	 * Instantiates a new BayesModel.
+	 */
 	public BayesModel(){
 		models = new TreeMap<Integer, ClassModel>();
 		wordCount=0;
 	}
 	
+	/**
+	 * Adds the specified word to the specified class bag of words.
+	 * @param word
+	 * @param classID
+	 */
 	public void addWordToClass(String word, int classID){
 		ClassModel model = models.get(classID);
 		if(model == null){
@@ -27,6 +42,10 @@ public class BayesModel {
 		wordCount++;
 	}
 	
+	/** Calculates the best matching class for the specified bagOfWords
+	 * @param words
+	 * @return class membership with highest probability
+	 */
 	public int getClassification(List<String> words){
 		List<Double> classValues = new ArrayList<Double>();
 		Set<Integer> keySet = models.keySet();

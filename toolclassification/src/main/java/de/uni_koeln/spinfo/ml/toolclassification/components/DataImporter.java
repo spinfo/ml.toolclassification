@@ -15,7 +15,8 @@ import de.uni_koeln.spinfo.ml.toolclassification.data.ToolParentClass;
 import de.uni_koeln.spinfo.ml.toolclassification.data.ToolSubClass;
 
 /**
- * A class to import data from specified tools-classes-files to the ml.toolclassification framework
+ * A class to import data from specified tools-classes-files 
+ * to the ml.toolclassification framework
  * @author jhermes
  *
  */
@@ -36,18 +37,30 @@ public class DataImporter {
 	
 	
 	
+	/**
+	 * Returns the tools that are contained in the specified tools-classes-file
+	 * @return tools from file
+	 */
 	public Map<String, Tool> getTools() {
 		return tools;
 	}
 
 
 
+	/** 
+	 * Returns the parent classes that are contained in the specified tools-classes-file
+	 * @return parent classes from file
+	 */
 	public Map<Integer, ToolParentClass> getParentClasses() {
 		return parentClasses;
 	}
 
 
 
+	/**
+	 * Returns the subordinate classes that are contained in the specified tools-classes-file
+	 * @return sub classes from file
+	 */
 	public Map<String, ToolSubClass> getSubClasses() {
 		return subClasses;
 	}
